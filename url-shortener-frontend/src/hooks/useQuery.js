@@ -1,0 +1,60 @@
+import { useQuery } from "@tanstack/react-query";
+import api from "../api/api";
+
+/**
+ * Fetch all URLs created by the logged-in user
+ */
+export const useFetchMyShortUrls = (token, onError) => {
+  return useQuery({
+    queryKey: ["my-shortenurls", token],
+    queryFn: async () => {
+      const res = await api.get("/api/urls/myurls", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      return res.data; // return only data
+    },
+    select: (data) => {
+      return data.sort(
+        (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+      );
+    },
+    onError,
+    staleTime: 5000,
+    enabled: !!token, // prevents API call if token is missing
+  });
+};
+
+/**
+ * Fetch total clicks grouped by date
+ */
+export const useFetchTotalClicks = (token, onError) => {
+  return useQuery({
+    queryKey: ["url-totalclick", token],
+    queryFn: async () => {
+      const res = await api.get(
+        "/api/urls/totalClicks?startDate=2024-01-01&endDate=2025-12-31",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      return res.data; // return only data
+    },
+    select: (data) => {
+      return Object.keys(data).map((key) => ({
+        clickDate: key,
+        count: data[key],
+      }));
+    },
+    onError,
+    staleTime: 5000,
+    enabled: !!token,
+  });
+};

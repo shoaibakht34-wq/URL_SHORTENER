@@ -1,0 +1,15 @@
+# Ignore Maven build output
+target/
+
+# Ignore Git history and config
+.git
+.gitignore
+
+# Ignore log files
+*.log
+
+# Ignore environment files
+.env
+
+# Optional: node modules if you have a frontend
+node_modules/
