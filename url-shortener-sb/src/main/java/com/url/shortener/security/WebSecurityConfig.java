@@ -53,7 +53,7 @@ public class WebSecurityConfig {
         return authProvider;
     }
 
-    // 🔥 ONLY CORS CONFIG (NO CONFLICTS)
+    //  ONLY CORS CONFIG (NO CONFLICTS)
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
@@ -81,12 +81,12 @@ public class WebSecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
 
-            // 🔥 IMPORTANT FIX (THIS WAS MISSING)
+            //  IMPORTANT FIX (THIS WAS MISSING)
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
             .authorizeHttpRequests(auth -> auth
 
-                // 🔥 MUST ALLOW PRE-FLIGHT REQUEST
+                //  MUST ALLOW PRE-FLIGHT REQUEST
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                 // public APIs

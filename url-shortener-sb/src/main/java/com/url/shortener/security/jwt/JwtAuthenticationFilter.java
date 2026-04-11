@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class JwtAuthenticationFilter  extends OncePerRequestFilter {
+    
     @Autowired
     private JwtUtils jwtTokenProvider;
     @Autowired
@@ -26,6 +27,12 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
             throws ServletException, IOException {
         
         //throw new UnsupportedOperationException("Unimplemented method 'doFilterInternal'");
+        
+        if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
+    filterChain.doFilter(request, response);
+    return;
+}
+        
         try {
             //get jwt from header
             String jwt=jwtTokenProvider.getJwtFromHeader(request);
