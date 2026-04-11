@@ -1,6 +1,6 @@
-# 🔗 Linklytics – Scalable URL Shortener 
+# 🔗 Linklytics – Scalable URL Shortener (Bitly Clone)
 
-Linklytics is a full-stack URL shortening platform that allows users to generate short links, redirect them efficiently, and manage URLs using a secure and scalable backend.
+Linklytics is a full-stack URL shortening platform that allows users to generate short links, redirect them efficiently, and manage URLs using a secure, scalable, and cloud-based backend.
 
 ---
 
@@ -17,7 +17,8 @@ Linklytics is a full-stack URL shortening platform that allows users to generate
 - 🚀 Fast redirection using unique short codes
 - 🔐 Secure authentication using JWT & Spring Security
 - 📡 RESTful API architecture
-- 💾 Efficient database storage and retrieval
+- ☁️ Cloud-hosted database using Supabase (PostgreSQL)
+- 💾 Efficient and scalable data storage
 - 🌍 Fully deployed (Frontend + Backend)
 
 ---
@@ -37,7 +38,7 @@ Linklytics is a full-stack URL shortening platform that allows users to generate
 - Vite
 
 ### Database
-- MySQL
+- Supabase (PostgreSQL)
 
 ### Deployment
 - Backend: Render
@@ -45,21 +46,30 @@ Linklytics is a full-stack URL shortening platform that allows users to generate
 
 ---
 
+## 🗄️ Database & Backend Services
+
+- Used Supabase as a managed PostgreSQL database service
+- Enabled scalable and cloud-based data storage
+- Optimized database queries for fast URL lookup and redirection
+- Integrated backend APIs with cloud database for real-time operations
+
+---
+
 ## ⚙️ How It Works
 
-1. User submits a long URL
-2. Backend generates a unique short code
-3. Short URL is stored in the database
-4. When accessed, backend fetches original URL
-5. User is redirected instantly
+1. User submits a long URL  
+2. Backend generates a unique short code  
+3. Short URL is stored in Supabase database  
+4. When accessed, backend fetches original URL  
+5. User is redirected instantly  
 
 ---
 
 ## 🔐 Authentication
 
-- Implemented JWT-based authentication
-- Secure API endpoints using Spring Security
-- Stateless session management
+- Implemented JWT-based authentication  
+- Secured API endpoints using Spring Security  
+- Stateless session management  
 
 ---
 
