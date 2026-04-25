@@ -46,13 +46,10 @@ public class UrlMappingController {
     @GetMapping("/myurls")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<UrlMAppingDTO>> getUserUrls(Principal principal){
-        if (principal == null) {
-        return ResponseEntity.status(401).build();
-    }
         User user= userService.findByUsername(principal.getName());
         List<UrlMAppingDTO> urls= urlMappingService.getUrlsByUser(user);
         return ResponseEntity.ok(urls);
-}
+    }
      
 
     @GetMapping("/analytics/{shortUrl}")
