@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,13 +44,14 @@ public class UrlMappingController {
         UrlMAppingDTO urlmappingDTO=urlMappingService.createShortUrl(originalUrl,principal.getName());
         return ResponseEntity.ok(urlmappingDTO);
     }
-    @GetMapping("/myurls")
-    @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<UrlMAppingDTO>> getUserUrls(Principal principal){
-        User user= userService.findByUsername(principal.getName());
-        List<UrlMAppingDTO> urls= urlMappingService.getUrlsByUser(user);
-        return ResponseEntity.ok(urls);
-    }
+   @GetMapping("/myurls")
+@PreAuthorize("hasRole('USER')")
+public ResponseEntity<List<UrlMAppingDTO>> getUserUrls(Authentication authentication) {
+    String username = authentication.getName();
+    User user = userService.findByUsername(username);
+    List<UrlMAppingDTO> urls = urlMappingService.getUrlsByUser(user);
+    return ResponseEntity.ok(urls);
+}
      
 
     @GetMapping("/analytics/{shortUrl}")
